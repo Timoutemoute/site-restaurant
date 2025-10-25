@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Au Gourmet Français</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Au Gourmet Français</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="equipe.html">Notre Équipe</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Notre Carte</h1>
+            <p>Découvrez nos spécialités gastronomiques françaises</p>
+        </div>
+    </section>
+
+    <section class="menu-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="entrees">Entrées</button>
+                <button class="category-tab" data-category="plats">Plats Principaux</button>
+                <button class="category-tab" data-category="desserts">Desserts</button>
+                <button class="category-tab" data-category="vins">Carte des Vins</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-items">
+        <div class="container">
+            <!-- Entrées -->
+            <div class="menu-category active" id="entrees">
+                <h2 class="category-title">Entrées</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Foie Gras Maison</h3>
+                                <span class="price">24€</span>
+                            </div>
+                            <p class="menu-item-description">Foie gras de canard mi-cuit, toast brioché, confiture d'oignons</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Escargots de Bourgogne</h3>
+                                <span class="price">18€</span>
+                            </div>
+                            <p class="menu-item-description">Escargots au beurre persillé, servis avec baguette fraîche</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Salade Gourmande</h3>
+                                <span class="price">16€</span>
+                            </div>
+                            <p class="menu-item-description">Mélange de jeunes pousses, noix, fromage de chèvre et vinaigrette au miel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plats Principaux -->
+            <div class="menu-category" id="plats">
+                <h2 class="category-title">Plats Principaux</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Bœuf Bourguignon</h3>
+                                <span class="price">32€</span>
+                            </div>
+                            <p class="menu-item-description">Bœuf mijoté au vin rouge de Bourgogne, lardons, champignons</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Confit de Canard</h3>
+                                <span class="price">28€</span>
+                            </div>
+                            <p class="menu-item-description">Cuisse de canard confite, pommes de terre sautées à l'ail</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Filet de Bar</h3>
+                                <span class="price">34€</span>
+                            </div>
+                            <p class="menu-item-description">Filet de bar de ligne, légumes de saison, beurre blanc</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-category" id="desserts">
+                <h2 class="category-title">Desserts</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Crème Brûlée</h3>
+                                <span class="price">12€</span>
+                            </div>
+                            <p class="menu-item-description">Crème vanille de Madagascar, caramel croustillant</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Tarte Tatin</h3>
+                                <span class="price">14€</span>
+                            </div>
+                            <p class="menu-item-description">Tarte aux pommes caramélisées, crème fraîche</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Profiteroles</h3>
+                                <span class="price">16€</span>
+                            </div>
+                            <p class="menu-item-description">Choux garnis de crème glacée vanille, sauce chocolat chaud</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vins -->
+            <div class="menu-category" id="vins">
+                <h2 class="category-title">Carte des Vins</h2>
+                <div class="wine-grid">
+                    <div class="wine-category">
+                        <h3>Vins Rouges</h3>
+                        <div class="wine-list">
+                            <div class="wine-item">
+                                <div class="wine-info">
+                                    <h4>Château Margaux 2015</h4>
+                                    <p>Grand cru classé de Bordeaux</p>
+                                </div>
+                                <span class="price">180€</span>
+                            </div>
+                            <div class="wine-item">
+                                <div class="wine-info">
+                                    <h4>Romanée-Conti 2012</h4>
+                                    <p>Bourgogne, pinot noir</p>
+                                </div>
+                                <span class="price">950€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wine-category">
+                        <h3>Vins Blancs</h3>
+                        <div class="wine-list">
+                            <div class="wine-item">
+                                <div class="wine-info">
+                                    <h4>Pouilly-Fuissé 2019</h4>
+                                    <p>Bourgogne, chardonnay</p>
+                                </div>
+                                <span class="price">65€</span>
+                            </div>
+                            <div class="wine-item">
+                                <div class="wine-info">
+                                    <h4>Sancerre 2020</h4>
+                                    <p>Loire, sauvignon blanc</p>
+                                </div>
+                                <span class="price">48€</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Au Gourmet Français</h3>
+                    <p>Restaurant gastronomique français offrant une expérience culinaire exceptionnelle au cœur de Metz.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="equipe.html">Notre Équipe</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 7 Rue des Messageries, 57000 Metz</li>
+                        <li><i class="fas fa-phone"></i> 09 72 65 22 61</li>
+                        <li><i class="fas fa-envelope"></i>contact@shc57.fr </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Horaires</h3>
+                    <ul>
+                        <li>Lun - Sam: 12h-14h30 & 19h-22h30</li>
+                        <li>Dimanche: Fermé</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Au Gourmet Français. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="politique-confidentialite.html">Politique de confidentialité</a>
+                    <a href="cgu.html">CGU</a>
+                    <a href="mentions-legales.html">Mentions légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
