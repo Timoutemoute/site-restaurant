@@ -992,6 +992,7 @@ footer {
         padding: 1.5rem;
     }
 }
+
 /* Optimisations pour mobile */
 * {
     -webkit-tap-highlight-color: transparent;
@@ -1011,11 +1012,13 @@ img {
 /* Amélioration des boutons sur mobile */
 .btn {
     -webkit-appearance: none;
+    appearance: none; /* Propriété standard pour compatibilité */
     border-radius: 4px;
 }
 
 /* Correction pour les inputs sur iOS */
 input, select, textarea {
     -webkit-appearance: none;
+    appearance: none; /* Propriété standard pour compatibilité */
     border-radius: 4px;
 }
