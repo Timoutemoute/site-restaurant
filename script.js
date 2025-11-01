@@ -31,3 +31,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // Déclenchement initial des animations
     window.dispatchEvent(new Event('scroll'));
 });
+    // Fermer le menu mobile en cliquant en dehors
+    document.addEventListener('click', function(e) {
+        const nav = document.querySelector('nav');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (nav.classList.contains('active') && 
+            !nav.contains(e.target) && 
+            !mobileMenuBtn.contains(e.target)) {
+            nav.classList.remove('active');
+        }
+    });
+    
+    // Empêcher le défilement quand le menu mobile est ouvert
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            const isActive = nav.classList.contains('active');
+            
+            if (isActive) {
+                document.body.style.overflow = '';
+            } else {
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+    
+    // Réinitialiser le défilement quand on clique sur un lien
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            document.body.style.overflow = '';
+        });
+    });

@@ -863,3 +863,159 @@ footer {
         max-width: 250px;
     }
 }
+/* Améliorations pour la réactivité mobile */
+@media (max-width: 768px) {
+    /* Correction pour la page Contact */
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    /* Amélioration de la carte sur mobile */
+    .map-container iframe {
+        height: 300px;
+    }
+    
+    /* Correction pour la page Équipe */
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .member-image {
+        height: 250px;
+    }
+    
+    /* Correction pour la page Menu */
+    .menu-preview-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .category-tab {
+        width: 100%;
+        max-width: 250px;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Amélioration du header sur mobile */
+    .header-content {
+        padding: 0 15px;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    /* Amélioration du hero sur mobile */
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .hero-buttons .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* Correction pour les sections */
+    section {
+        padding: 3rem 0;
+    }
+    
+    /* Amélioration du footer sur mobile */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Améliorations pour les très petits écrans */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .page-hero {
+        padding: 6rem 0 3rem;
+    }
+    
+    .contact-form-container {
+        padding: 1.5rem;
+    }
+    
+    .menu-item {
+        padding: 1rem;
+    }
+    
+    .team-member .member-info {
+        padding: 1.5rem;
+    }
+}
+/* Optimisations pour mobile */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Amélioration du scrolling sur iOS */
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Optimisation des images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Amélioration des boutons sur mobile */
+.btn {
+    -webkit-appearance: none;
+    border-radius: 4px;
+}
+
+/* Correction pour les inputs sur iOS */
+input, select, textarea {
+    -webkit-appearance: none;
+    border-radius: 4px;
+}
