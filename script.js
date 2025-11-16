@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Récupérer les données du formulaire
             const formData = {
                 name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
+                email: document.getElementById('email', 'restaurant@shc57.fr').value,
                 phone: document.getElementById('phone').value,
                 date: document.getElementById('date').value,
                 time: document.getElementById('time').value,
@@ -122,4 +122,5 @@ document.addEventListener('DOMContentLoaded', function() {
             messageDiv.style.display = 'none';
         }, 5000);
     }
+
 });
