@@ -31,44 +31,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Déclenchement initial des animations
     window.dispatchEvent(new Event('scroll'));
 });
-    // Fermer le menu mobile en cliquant en dehors
-    document.addEventListener('click', function(e) {
+
+// Fermer le menu mobile en cliquant en dehors
+document.addEventListener('click', function(e) {
+    const nav = document.querySelector('nav');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    
+    if (nav.classList.contains('active') && 
+        !nav.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target)) {
+        nav.classList.remove('active');
+    }
+});
+
+// Empêcher le défilement quand le menu mobile est ouvert
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', function() {
         const nav = document.querySelector('nav');
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const isActive = nav.classList.contains('active');
         
-        if (nav.classList.contains('active') && 
-            !nav.contains(e.target) && 
-            !mobileMenuBtn.contains(e.target)) {
-            nav.classList.remove('active');
+        if (isActive) {
+            document.body.style.overflow = '';
+        } else {
+            document.body.style.overflow = 'hidden';
         }
     });
-    
-    // Empêcher le défilement quand le menu mobile est ouvert
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            const nav = document.querySelector('nav');
-            const isActive = nav.classList.contains('active');
-            
-            if (isActive) {
-                document.body.style.overflow = '';
-            } else {
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    }
-    
-    // Réinitialiser le défilement quand on clique sur un lien
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            document.body.style.overflow = '';
-        });
+}
+
+// Réinitialiser le défilement quand on clique sur un lien
+const navLinks = document.querySelectorAll('nav a');
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        document.body.style.overflow = '';
     });
+});
 
 // EmailJS Configuration
 (function() {
-    emailjs.init("chtGD9p-YRLMyN_mm"); // Remplacez par votre clé publique EmailJS
+    emailjs.init("chtGD9p-YRLMyN_mm");
 })();
 
 // Gestion du formulaire de réservation
@@ -87,19 +88,34 @@ document.addEventListener('DOMContentLoaded', function() {
             // Récupérer les données du formulaire
             const formData = {
                 name: document.getElementById('name').value,
-                email: document.getElementById('email', 'restaurant@shc57.fr').value,
+                email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 date: document.getElementById('date').value,
                 time: document.getElementById('time').value,
                 guests: document.getElementById('guests').value,
                 message: document.getElementById('message').value,
-                reservation_date: new Date().toLocaleString('fr-FR')
+                reservation_date: new Date().toLocaleString('fr-FR'),
+                restaurant_email: 'restaurant@shc57.fr' // Ajout de l'email du restaurant
             };
             
-            // Envoyer l'email via EmailJS
-            emailjs.send('service_q7x43y5', 'template_zh0v0bf', formData)
-                .then(function(response) {
-                    showMessage('✅ Réservation envoyée avec succès ! Nous vous contacterons rapidement pour confirmation.', 'success');
+            // Envoyer l'email de confirmation au client
+            const clientEmailPromise = emailjs.send('service_q7x43y5', 'template_zh0v0bf', {
+                ...formData,
+                to_email: formData.email, // Envoi au client
+                subject: 'Confirmation de votre réservation - Au Gourmet Français'
+            });
+            
+            // Envoyer l'email de notification au restaurant
+            const restaurantEmailPromise = emailjs.send('service_q7x43y5', 'template_zh0v0bf', {
+                ...formData,
+                to_email: 'restaurant@shc57.fr', // Envoi au restaurant
+                subject: 'Nouvelle réservation - ' + formData.name
+            });
+            
+            // Gérer les deux envois d'emails
+            Promise.all([clientEmailPromise, restaurantEmailPromise])
+                .then(function(responses) {
+                    showMessage('✅ Réservation envoyée avec succès ! Un email de confirmation vous a été envoyé.', 'success');
                     reservationForm.reset();
                 }, function(error) {
                     showMessage('❌ Erreur lors de l\'envoi. Veuillez nous appeler directement au 09 72 65 22 61', 'error');
@@ -122,5 +138,4 @@ document.addEventListener('DOMContentLoaded', function() {
             messageDiv.style.display = 'none';
         }, 5000);
     }
-
 });
