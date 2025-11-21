@@ -126,6 +126,78 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = false;
                 });
         });
+    // Dans script.js, remplacez la partie de l'écouteur d'événement par ceci :
+
+if (reservationForm) {
+    reservationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // ... (votre code existant pour récupérer formData et le bouton) ...
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Envoi en cours...';
+        submitBtn.disabled = true;
+
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            date: document.getElementById('date').value,
+            time: document.getElementById('time').value,
+            guests: document.getElementById('guests').value
+        };
+
+        // --- AJOUT GOOGLE CALENDAR ---
+        // Collez ici l'URL que vous avez copiée à l'étape 2
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/shc57.fr/s/AKfycbxwAKRvAX7RfaEEaZITFeisakYGkEwMGDZRxKJrNAtKTd7TgdwPBu4t_MSr5vCbukA4ng/exec'; 
+        
+        // Création de la requête vers Google Agenda
+        // On utilise mode: 'no-cors' car Google ne renvoie pas les en-têtes CORS standards, 
+        // mais l'action sera bien exécutée.
+        const calendarPromise = fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', 
+            headers: {
+                'Content-Type': 'text/plain' // Important pour éviter les erreurs CORS avec Google Scripts
+            },
+            body: JSON.stringify(formData)
+        });
+        // -----------------------------
+
+        // Envoi au client (EmailJS)
+        const clientEmailPromise = emailjs.send('service_q7x43y5', 'template_confirmation_client', {
+            ...formData,
+            to_name: formData.name,
+            to_email: formData.email,
+            reply_to: 'contact@shc57.fr'
+        });
+
+        // Envoi au restaurant (EmailJS)
+        const restaurantEmailPromise = emailjs.send('service_q7x43y5', 'template_zh0v0bf', {
+            ...formData,
+            to_email: 'restaurant@shc57.fr',
+            subject: 'Nouvelle réservation - ' + formData.name
+        });
+        
+        // On attend que les 3 actions (Email Client + Email Resto + Google Agenda) soient finies
+        Promise.all([clientEmailPromise, restaurantEmailPromise, calendarPromise])
+            .then(function(responses) {
+                showMessage('✅ Réservation enregistrée et ajoutée à l\'agenda !', 'success');
+                reservationForm.reset();
+            })
+            .catch(function(error) {
+                // Même si l'agenda échoue, les emails peuvent avoir fonctionné, ou l'inverse.
+                // Ici on affiche une erreur générique si tout plante
+                console.error('Erreur:', error);
+                showMessage('⚠️ Réservation envoyée par email, mais erreur possible de synchro.', 'success'); 
+                reservationForm.reset();
+            })
+            .finally(function() {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+    });
+}
     }
     
     function showMessage(text, type) {
