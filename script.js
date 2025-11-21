@@ -76,56 +76,7 @@ navLinks.forEach(link => {
 document.addEventListener('DOMContentLoaded', function() {
     const reservationForm = document.getElementById('reservation-form');
     
-    if (reservationForm) {
-        reservationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Envoi en cours...';
-            submitBtn.disabled = true;
-            
-            // Récupérer les données du formulaire
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                date: document.getElementById('date').value,
-                time: document.getElementById('time').value,
-                guests: document.getElementById('guests').value,
-                message: document.getElementById('message').value,
-                reservation_date: new Date().toLocaleString('fr-FR'),
-                restaurant_email: 'restaurant@shc57.fr' // Ajout de l'email du restaurant
-            };
-            
-            // Envoyer l'email de confirmation au client
-            const clientEmailPromise = emailjs.send('service_q7x43y5', 'template_zh0v0bf', {
-                ...formData,
-                to_email: formData.email, // Envoi au client
-                subject: 'Confirmation de votre réservation - Au Gourmet Français'
-            });
-            
-            // Envoyer l'email de notification au restaurant
-            const restaurantEmailPromise = emailjs.send('service_q7x43y5', 'template_zh0v0bf', {
-                ...formData,
-                to_email: 'restaurant@shc57.fr', // Envoi au restaurant
-                subject: 'Nouvelle réservation - ' + formData.name
-            });
-            
-            // Gérer les deux envois d'emails
-            Promise.all([clientEmailPromise, restaurantEmailPromise])
-                .then(function(responses) {
-                    showMessage('✅ Réservation envoyée avec succès ! Un email de confirmation vous a été envoyé.', 'success');
-                    reservationForm.reset();
-                }, function(error) {
-                    showMessage('❌ Erreur lors de l\'envoi. Veuillez nous appeler directement au 09 72 65 22 61', 'error');
-                    console.error('EmailJS error:', error);
-                })
-                .finally(function() {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                });
-        });
+
     // Dans script.js, remplacez la partie de l'écouteur d'événement par ceci :
 
 if (reservationForm) {
