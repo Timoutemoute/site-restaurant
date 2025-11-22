@@ -61,16 +61,21 @@ document.addEventListener('DOMContentLoaded', function() {
 function initReservationForm() {
     const reservationForm = document.getElementById('reservation-form');
 
-    if (!reservationForm) return; // Si pas de formulaire sur la page, on s'arrête
+    if (!reservationForm) return; 
 
     reservationForm.addEventListener('submit', function(e) {
         e.preventDefault();
         console.log("Formulaire soumis...");
 
-        const submitBtn = this.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Envoi en cours...';
-        submitBtn.disabled = true;
+        // CORRECTION ICI : On cible le bouton par son type "submit"
+        const submitBtn = this.querySelector('button[type="submit"]');
+        
+        let originalText = "Réserver"; // Valeur par défaut si le bouton n'a pas de texte
+        if (submitBtn) {
+            originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+        }
 
         const formData = {
             name: document.getElementById('name').value,
@@ -81,14 +86,14 @@ function initReservationForm() {
             guests: document.getElementById('guests').value
         };
 
-        // --- URL GOOGLE SCRIPT (Vérifiez que c'est la bonne !) ---
+        // URL de votre script Google
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwAKRvAX7RfaEEaZITFeisakYGkEwMGDZRxKJrNAtKTd7TgdwPBu4t_MSr5vCbukA4ng/exec'; 
 
         // 1. Envoi Google Agenda
         console.log("Tentative envoi Google Agenda...");
         const calendarPromise = fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Important pour Google
+            mode: 'no-cors',
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify(formData)
         });
@@ -119,13 +124,14 @@ function initReservationForm() {
             })
             .catch(function(error) {
                 console.error('Erreur pendant l\'envoi:', error);
-                // On affiche quand même un succès partiel car souvent l'agenda fonctionne même si emailjs bug ou inversement
                 showMessage('✅ Demande envoyée (Vérifiez vos emails).', 'success');
                 reservationForm.reset();
             })
             .finally(function() {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+                if (submitBtn) {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             });
     });
 }
@@ -136,6 +142,14 @@ function showMessage(text, type) {
         messageDiv.textContent = text;
         messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
         messageDiv.style.display = 'block';
+        
+        // Couleur verte pour le succès (style en ligne pour être sûr)
+        if (type === 'success') {
+            messageDiv.style.color = '#155724';
+            messageDiv.style.backgroundColor = '#d4edda';
+            messageDiv.style.border = '1px solid #c3e6cb';
+        }
+        
         setTimeout(() => {
             messageDiv.style.display = 'none';
         }, 5000);
