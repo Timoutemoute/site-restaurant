@@ -155,3 +155,27 @@ function showMessage(text, type) {
         }, 5000);
     }
 }
+
+console.log("Script Popup chargé");
+
+    // Fonction pour ouvrir
+    function ouvrirPopup() {
+        const popup = document.getElementById('popup-boutique');
+        if(popup) {
+            popup.style.display = 'flex';
+            console.log("Popup ouverte !");
+        }
+    }
+
+    // Fonction pour fermer
+    function fermerPopup() {
+        const popup = document.getElementById('popup-boutique');
+        if(popup) {
+            popup.style.display = 'none';
+        }
+    }
+
+    // Lancement automatique après 1 seconde
+    setTimeout(function() {
+        ouvrirPopup();
+    }, 1000);
